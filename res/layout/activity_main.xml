@@ -29,22 +29,13 @@
         android:text="停止记录" />
 
     <Button
-        android:id="@+id/btnDistanceShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="90dp"
-        android:text="显示路程" />
-    <Button
         android:id="@+id/btnClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="146dp"
+        android:layout_marginTop="90dp"
         android:text="清除轨迹" />
     <Button
         android:id="@+id/btnScreenShot"
@@ -53,7 +44,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="202dp"
+        android:layout_marginTop="146dp"
         android:text="轨迹截图" />
     <Button
         android:id="@+id/btnScreenShotShare"
@@ -62,7 +53,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="202dp"
+        android:layout_marginTop="146dp"
         android:text="分享截图" />
 
     <TextView

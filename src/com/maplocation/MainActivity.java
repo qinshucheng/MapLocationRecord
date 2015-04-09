@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
 	//设置显示路程View
 	private TextView distanceView;
 	//设置记录按钮
-	private Button btnStartRecord,btnStopRecord,btnDistanceShow,btnClear,btnScreenShot,btnScreenShotShare;
+	private Button btnStartRecord,btnStopRecord,btnClear,btnScreenShot,btnScreenShotShare;
 	//设置定位间隔时间(Ms)
 	private static final int UPDATE_TIME = 3000;
     //设置Handler消息
@@ -114,13 +114,11 @@ public class MainActivity extends Activity {
 		distanceView.setTextSize(25);
 		
 		btnStartRecord  = (Button) findViewById(R.id.btnStartRecord);
-		btnStopRecord   = (Button) findViewById(R.id.btnStopRecord);     
-		btnDistanceShow = (Button) findViewById(R.id.btnDistanceShow); 
+		btnStopRecord   = (Button) findViewById(R.id.btnStopRecord);    
 		btnClear        = (Button) findViewById(R.id.btnClear);               
 		btnScreenShot   = (Button) findViewById(R.id.btnScreenShot);
 		btnScreenShotShare = (Button) findViewById(R.id.btnScreenShotShare);
 		btnStopRecord.setVisibility(View.GONE);
-		btnDistanceShow.setVisibility(View.GONE);
 		btnClear.setVisibility(View.GONE);
 		btnScreenShot.setVisibility(View.GONE);
 		btnScreenShotShare.setVisibility(View.GONE);
@@ -133,7 +131,6 @@ public class MainActivity extends Activity {
 					distanceView.setVisibility(View.VISIBLE);
 					btnStartRecord.setVisibility(View.GONE);
 					btnStopRecord.setVisibility(View.VISIBLE);
-					btnDistanceShow.setVisibility(View.VISIBLE);
 					btnClear.setVisibility(View.GONE);
 					btnScreenShot.setVisibility(View.GONE);
 					btnScreenShotShare.setVisibility(View.GONE);
@@ -142,21 +139,15 @@ public class MainActivity extends Activity {
 					isFirstRecord = true;
 					btnStopRecord.setVisibility(View.GONE);
 					btnStartRecord.setVisibility(View.VISIBLE);
-					btnDistanceShow.setVisibility(View.VISIBLE);
 					btnClear.setVisibility(View.VISIBLE);
 					btnScreenShot.setVisibility(View.VISIBLE);
 					btnScreenShotShare.setVisibility(View.GONE);
-				}else if (v.equals(btnDistanceShow)) {
-					//显示总距离
-					Toast.makeText(MainActivity.this, "我已经走了"+distance+"米", Toast.LENGTH_SHORT)
-						 .show();
 				}else if (v.equals(btnClear)) {
 					clearRecord();
 					isRecording = false;
 					isFirstRecord = true;
 					distanceView.setVisibility(View.GONE);
 					btnClear.setVisibility(View.GONE);
-					btnDistanceShow.setVisibility(View.GONE);
 					btnScreenShot.setVisibility(View.GONE);
 					btnScreenShotShare.setVisibility(View.GONE);
 					distance = 0.0;
@@ -202,7 +193,6 @@ public class MainActivity extends Activity {
 		};
 		btnStartRecord.setOnClickListener(onClickListener);
 		btnStopRecord.setOnClickListener(onClickListener);
-		btnDistanceShow.setOnClickListener(onClickListener);
 		btnClear.setOnClickListener(onClickListener);
 		btnScreenShot.setOnClickListener(onClickListener);
 		btnScreenShotShare.setOnClickListener(onClickListener);
