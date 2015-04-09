@@ -9,14 +9,16 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -60,12 +62,30 @@ public class MainActivity extends Activity {
 	//截图路径
 	private File file = new File("/mnt/sdcard/recordShot.png");
 	
-	
+	//设置显示路程View
+	private TextView distanceView;
 	//设置记录按钮
 	private Button btnStartRecord,btnStopRecord,btnDistanceShow,btnClear,btnScreenShot,btnScreenShotShare;
 	//设置定位间隔时间(Ms)
 	private static final int UPDATE_TIME = 3000;
-
+    //设置Handler消息
+	private static final int DISTANCE_UNEQUAL_ZERO = 1;
+	private static final int DISTANCE_EQUAL_ZERO = 0;
+	@SuppressLint("HandlerLeak")
+	private Handler Handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case DISTANCE_UNEQUAL_ZERO:
+				distanceView.setText("我走了"+(int)distance+"米");
+				break;
+			case DISTANCE_EQUAL_ZERO:
+				distanceView.setText("我走了0米");
+			default:
+				break;
+			}
+		};
+	};
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,6 +108,11 @@ public class MainActivity extends Activity {
 		
 		mMapView.refreshDrawableState();  //刷新
 		
+		distanceView = (TextView) findViewById(R.id.distanceView);
+		distanceView.setVisibility(View.GONE);
+		distanceView.setTextColor(Color.GREEN);
+		distanceView.setTextSize(25);
+		
 		btnStartRecord  = (Button) findViewById(R.id.btnStartRecord);
 		btnStopRecord   = (Button) findViewById(R.id.btnStopRecord);     
 		btnDistanceShow = (Button) findViewById(R.id.btnDistanceShow); 
@@ -105,6 +130,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if (v.equals(btnStartRecord)) {
 					isRecording = true;
+					distanceView.setVisibility(View.VISIBLE);
 					btnStartRecord.setVisibility(View.GONE);
 					btnStopRecord.setVisibility(View.VISIBLE);
 					btnDistanceShow.setVisibility(View.VISIBLE);
@@ -128,11 +154,13 @@ public class MainActivity extends Activity {
 					clearRecord();
 					isRecording = false;
 					isFirstRecord = true;
+					distanceView.setVisibility(View.GONE);
 					btnClear.setVisibility(View.GONE);
 					btnDistanceShow.setVisibility(View.GONE);
 					btnScreenShot.setVisibility(View.GONE);
 					btnScreenShotShare.setVisibility(View.GONE);
 					distance = 0.0;
+					Handler.sendEmptyMessage(DISTANCE_EQUAL_ZERO);
 				}else if (v.equals(btnScreenShot)) {
 					btnScreenShot.setVisibility(View.GONE);
 					btnScreenShotShare.setVisibility(View.VISIBLE);
@@ -269,7 +297,7 @@ public class MainActivity extends Activity {
 			double dis = DistanceUtil.getDistance(nowlocal, lastlocal);
 			//计算总距离
 			distance +=dis;
-					
+			Handler.sendEmptyMessage(DISTANCE_UNEQUAL_ZERO);
 		/*	new AlertDialog.Builder(MainActivity.this)
 			      .setTitle("我已经走了：")
 			      .setMessage(distance+"米")
