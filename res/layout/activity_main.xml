@@ -17,6 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
         android:layout_marginTop="34dp"
+        android:background="@color/button3_color"
         android:text="记录轨迹" />
     <Button
         android:id="@+id/btnStopRecord"
@@ -26,6 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
         android:layout_marginTop="34dp"
+        android:background="@color/button2_color"
         android:text="停止记录" />
 
     <Button
@@ -36,6 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
         android:layout_marginTop="90dp"
+        android:background="@color/button2_color"
         android:text="清除轨迹" />
     <Button
         android:id="@+id/btnScreenShot"
@@ -45,6 +48,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
         android:layout_marginTop="146dp"
+        android:background="@color/button2_color"
         android:text="轨迹截图" />
     <Button
         android:id="@+id/btnScreenShotShare"
@@ -54,6 +58,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="32dp"
         android:layout_marginTop="146dp"
+        android:background="@color/button2_color"
         android:text="分享截图" />
 
     <TextView
